@@ -1,6 +1,5 @@
 const React = require('react');
-const ReactNative = require('react-native');
-const DeprecatedPropTypes = require('deprecated-react-native-prop-types');
+const { ViewPropTypes } = require('deprecated-react-native-prop-types');
 const PropTypes = require('prop-types');
 const createReactClass = require('create-react-class');
 const {
@@ -11,7 +10,7 @@ const {
   Text,
   Platform,
   Dimensions,
-} = ReactNative;
+} = require('react-native');
 const Button = require('./Button');
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
@@ -25,12 +24,12 @@ const ScrollableTabBar = createReactClass({
     activeTextColor: PropTypes.string,
     inactiveTextColor: PropTypes.string,
     scrollOffset: PropTypes.number,
-    style: DeprecatedPropTypes.ViewPropTypes.style,
-    tabStyle: DeprecatedPropTypes.ViewPropTypes.style,
-    tabsContainerStyle: DeprecatedPropTypes.ViewPropTypes.style,
-    textStyle: DeprecatedPropTypes.TextPropTypes.style,
+    style: ViewPropTypes.style,
+    tabStyle: ViewPropTypes.style,
+    tabsContainerStyle: ViewPropTypes.style,
+    textStyle: Text.propTypes.style,
     renderTab: PropTypes.func,
-    underlineStyle: DeprecatedPropTypes.ViewPropTypes.style,
+    underlineStyle: ViewPropTypes.style,
     onScroll: PropTypes.func,
   },
 
@@ -165,10 +164,6 @@ const ScrollableTabBar = createReactClass({
       width: this.state._widthTabUnderline,
     };
 
-    const {
-      onScroll,
-    } = this.props;
-
     return <View
       style={[styles.container, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}
       onLayout={this.onContainerLayout}
@@ -181,8 +176,6 @@ const ScrollableTabBar = createReactClass({
         directionalLockEnabled={true}
         bounces={false}
         scrollsToTop={false}
-        onScroll={onScroll}
-        scrollEventThrottle={16}
       >
         <View
           style={[styles.tabs, {width: this.state._containerWidth, }, this.props.tabsContainerStyle, ]}

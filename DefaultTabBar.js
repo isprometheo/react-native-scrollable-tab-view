@@ -1,6 +1,5 @@
 const React = require('react');
-const ReactNative = require('react-native');
-const DeprecatedPropTypes = require('deprecated-react-native-prop-types');
+const { ViewPropTypes } = require('deprecated-react-native-prop-types');
 const PropTypes = require('prop-types');
 const createReactClass = require('create-react-class');
 const {
@@ -8,7 +7,7 @@ const {
   Text,
   View,
   Animated,
-} = ReactNative;
+} = require('react-native');
 const Button = require('./Button');
 
 const DefaultTabBar = createReactClass({
@@ -19,10 +18,10 @@ const DefaultTabBar = createReactClass({
     backgroundColor: PropTypes.string,
     activeTextColor: PropTypes.string,
     inactiveTextColor: PropTypes.string,
-    textStyle: DeprecatedPropTypes.TextPropTypes.style,
-    tabStyle: DeprecatedPropTypes.ViewPropTypes.style,
+    textStyle: Text.propTypes.style,
+    tabStyle: ViewPropTypes.style,
     renderTab: PropTypes.func,
-    underlineStyle: DeprecatedPropTypes.ViewPropTypes.style,
+    underlineStyle: ViewPropTypes.style,
   },
 
   getDefaultProps() {
@@ -87,7 +86,7 @@ const DefaultTabBar = createReactClass({
                 { translateX },
               ]
             },
-            this.props.tabBarUnderlineStyle,
+            this.props.underlineStyle,
           ]}
         />
       </View>
